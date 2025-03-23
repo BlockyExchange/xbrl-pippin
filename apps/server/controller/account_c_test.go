@@ -62,7 +62,7 @@ func TestAccountCreate(t *testing.T) {
 	assert.Contains(t, respJson, "account")
 	_, err = utils.AddressToPub(respJson["account"].(string), false)
 	assert.Nil(t, err)
-	assert.Equal(t, "nano_13coy8t4jzd516m5ydw8a7mdfguttcm6nkm4t69fwd1dzm87mgj5p8ijge8w", respJson["account"].(string))
+	assert.Equal(t, "xbrl_13coy8t4jzd516m5ydw8a7mdfguttcm6nkm4t69fwd1dzm87mgj5p8ijge8w", respJson["account"].(string))
 
 	// Create an account at index 500 to make sure it comes back correctly
 	// First derive expected

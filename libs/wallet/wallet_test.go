@@ -115,7 +115,7 @@ func TestWalletCreate(t *testing.T) {
 	// Ensure account is created
 	account, err := MockWallet.DB.Account.Query().Where(account.WalletID(wallet.ID)).First(MockWallet.Ctx)
 	assert.Nil(t, err)
-	assert.Equal(t, "nano_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee", account.Address)
+	assert.Equal(t, "xbrl_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee", account.Address)
 	assert.Equal(t, 0, *account.AccountIndex)
 	assert.Equal(t, true, account.Work)
 }
@@ -214,13 +214,13 @@ func TestWalletRepresentativeSet(t *testing.T) {
 	wallet, err = MockWallet.GetWallet(wallet.ID.String())
 	assert.Nil(t, err)
 
-	err = MockWallet.WalletRepresentativeSet(wallet, "nano_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee", false, nil)
+	err = MockWallet.WalletRepresentativeSet(wallet, "xbrl_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee", false, nil)
 	assert.Nil(t, err)
 
 	// Retrieve wallet
 	wallet, err = MockWallet.GetWallet(wallet.ID.String())
 	assert.Nil(t, err)
-	assert.Equal(t, "nano_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee", *wallet.Representative)
+	assert.Equal(t, "xbrl_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee", *wallet.Representative)
 }
 
 func TestWalletChangeSeed(t *testing.T) {
@@ -239,7 +239,7 @@ func TestWalletChangeSeed(t *testing.T) {
 	// Change seed
 	newest, err := MockWallet.WalletChangeSeed(wallet, "c0e319472702d7cbe728ad05647395498a6ad498b9ae7e36a33cc37fef60f27a")
 	assert.Nil(t, err)
-	assert.Equal(t, "nano_33fj9exam1ppgzaco6hjd7z1nnapnf4gh3ech4fbfkr6eotb7bui3qzukt73", newest.Address)
+	assert.Equal(t, "xbrl_33fj9exam1ppgzaco6hjd7z1nnapnf4gh3ech4fbfkr6eotb7bui3qzukt73", newest.Address)
 	assert.NotEqual(t, oldAddress, newest.Address)
 
 	// Test with locked wallet
@@ -256,5 +256,5 @@ func TestWalletChangeSeed(t *testing.T) {
 	// Change seed
 	newest, err = MockWallet.WalletChangeSeed(wallet, "e0e87bf97ac01f4428864aa752a2d7acb9c2ca99ea2e69296c8507d5d71408fb")
 	assert.Nil(t, err)
-	assert.Equal(t, "nano_16rxu414wbt34tyn7yugup99s4xt1htrfufkwjce19ezfwfbmzrf343ynyoi", newest.Address)
+	assert.Equal(t, "xbrl_16rxu414wbt34tyn7yugup99s4xt1htrfufkwjce19ezfwfbmzrf343ynyoi", newest.Address)
 }

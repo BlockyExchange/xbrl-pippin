@@ -44,10 +44,10 @@ func TestGetAccount(t *testing.T) {
 	assert.Equal(t, account.Address, retrieved.Address)
 
 	// Retrieve unknown account
-	_, err = MockWallet.GetAccount(wallet, "nano_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee")
+	_, err = MockWallet.GetAccount(wallet, "xbrl_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee")
 	assert.ErrorIs(t, ErrAccountNotFound, err)
 
-	_, err = MockWallet.GetAccountByAddress("nano_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee")
+	_, err = MockWallet.GetAccountByAddress("xbrl_1efa1gxbitary1urzix9h13nkzadtz71n3auyj7uztb8i4qbtipu8cxz61ee")
 	assert.ErrorIs(t, ErrAccountNotFound, err)
 }
 
@@ -62,12 +62,12 @@ func TestAccountCreate(t *testing.T) {
 	acct, err := MockWallet.AccountCreate(wallet, nil)
 	assert.Nil(t, err)
 	assert.Equal(t, 1, *acct.AccountIndex)
-	assert.Equal(t, "nano_3tdqk8ghsdfapzhrag5978izd19minorfmxergefkecdsbyxaw6og4fejs89", acct.Address)
+	assert.Equal(t, "xbrl_3tdqk8ghsdfapzhrag5978izd19minorfmxergefkecdsbyxaw6og4fejs89", acct.Address)
 
 	acct, err = MockWallet.AccountCreate(wallet, nil)
 	assert.Nil(t, err)
 	assert.Equal(t, 2, *acct.AccountIndex)
-	assert.Equal(t, "nano_1frwge7oebdn87jip7k3sa1uuyf4yxxjh8jg67i69r7smf7tddj1gr6yremf", acct.Address)
+	assert.Equal(t, "xbrl_1frwge7oebdn87jip7k3sa1uuyf4yxxjh8jg67i69r7smf7tddj1gr6yremf", acct.Address)
 
 	// Test collision
 	idx := 2
@@ -79,13 +79,13 @@ func TestAccountCreate(t *testing.T) {
 	acct, err = MockWallet.AccountCreate(wallet, &idx)
 	assert.Nil(t, err)
 	assert.Equal(t, "69d5b476d8e892213a17511b977de91eb41adc9b8bf46e25a42da3d4de70427bd194c238a97aa0aa436cfb4507f2bd4c1e8e4adb5f91f0e56eb30ee4da723493", *acct.PrivateKey)
-	assert.Equal(t, "nano_3nenrawckyo1ob3psyt71zsdtm1yjs7fpqwjy5kpxergwmf96f6mdenouyyk", acct.Address)
+	assert.Equal(t, "xbrl_3nenrawckyo1ob3psyt71zsdtm1yjs7fpqwjy5kpxergwmf96f6mdenouyyk", acct.Address)
 
 	// Test now that sequence is broken
 	acct, err = MockWallet.AccountCreate(wallet, nil)
 	assert.Nil(t, err)
 	assert.Equal(t, 4, *acct.AccountIndex)
-	assert.Equal(t, "nano_1w84hd687n5nywb1zfjat7ghe7czgo39tyeqbnbi67icr4fornhqgh3w5q6a", acct.Address)
+	assert.Equal(t, "xbrl_1w84hd687n5nywb1zfjat7ghe7czgo39tyeqbnbi67icr4fornhqgh3w5q6a", acct.Address)
 
 	// Check that it fails if wallet is locked
 	MockWallet.EncryptWallet(wallet, "password")
@@ -110,26 +110,26 @@ func TestAdhocAccountCreate(t *testing.T) {
 	acct, err := MockWallet.AccountCreate(wallet, nil)
 	assert.Nil(t, err)
 	assert.Equal(t, 1, *acct.AccountIndex)
-	assert.Equal(t, "nano_3suihcm3txrfcnipecixeu7kcdm8jisyb1osy14j1r5na1c17g7kkbbu143o", acct.Address)
+	assert.Equal(t, "xbrl_3suihcm3txrfcnipecixeu7kcdm8jisyb1osy14j1r5na1c17g7kkbbu143o", acct.Address)
 
 	_, priv, _ := ed25519.GenerateKey(strings.NewReader("1f729340e07eee69abac049c2fdd4a3c4b50e4672a2fabdf1ae295f2b4f3040d"))
 	adhocAcct, err := MockWallet.AdhocAccountCreate(wallet, priv)
 	assert.Nil(t, err)
 	assert.Equal(t, "31663732393334306530376565653639616261633034396332666464346133632c9c941001f4236f487aac98848320ce746f7b809af76e5e795835ef30022424", *adhocAcct.PrivateKey)
-	assert.Equal(t, "nano_1d6wkia15x35fx69od6rik3k3mmnfxxr38qqfsh9kp3oxwr16b36eztouu3a", adhocAcct.Address)
+	assert.Equal(t, "xbrl_1d6wkia15x35fx69od6rik3k3mmnfxxr38qqfsh9kp3oxwr16b36eztouu3a", adhocAcct.Address)
 	assert.Equal(t, wallet.ID, adhocAcct.WalletID)
 
 	// Test duplicate returns same account
 	adhocAcct, err = MockWallet.AdhocAccountCreate(wallet, priv)
 	assert.Nil(t, err)
 	assert.Equal(t, "31663732393334306530376565653639616261633034396332666464346133632c9c941001f4236f487aac98848320ce746f7b809af76e5e795835ef30022424", *adhocAcct.PrivateKey)
-	assert.Equal(t, "nano_1d6wkia15x35fx69od6rik3k3mmnfxxr38qqfsh9kp3oxwr16b36eztouu3a", adhocAcct.Address)
+	assert.Equal(t, "xbrl_1d6wkia15x35fx69od6rik3k3mmnfxxr38qqfsh9kp3oxwr16b36eztouu3a", adhocAcct.Address)
 	assert.Equal(t, wallet.ID, adhocAcct.WalletID)
 
 	// Test we get non-adhoc account if we are trying to re-create it
 	_, priv, _ = utils.KeypairFromSeed(seed, 1)
 	acct, err = MockWallet.AdhocAccountCreate(wallet, priv)
-	assert.Equal(t, "nano_3suihcm3txrfcnipecixeu7kcdm8jisyb1osy14j1r5na1c17g7kkbbu143o", acct.Address)
+	assert.Equal(t, "xbrl_3suihcm3txrfcnipecixeu7kcdm8jisyb1osy14j1r5na1c17g7kkbbu143o", acct.Address)
 	assert.Equal(t, 1, *acct.AccountIndex)
 
 	// Check that it fails if wallet is locked
@@ -167,16 +167,16 @@ func TestAccountsCreate(t *testing.T) {
 	assert.Equal(t, 8, *accts[7].AccountIndex)
 	assert.Equal(t, 9, *accts[8].AccountIndex)
 	assert.Equal(t, 10, *accts[9].AccountIndex)
-	assert.Equal(t, "nano_3hntkbk1q6pn1n8481shemojcmtpxxpjbojm7h5h5p6jz53bahjuif6d8j4f", accts[0].Address)
-	assert.Equal(t, "nano_1dh7j8bw1pi8xur1zste3c7oqc1ef3yttory4snhufb5haj1ctzxapgpqhzq", accts[1].Address)
-	assert.Equal(t, "nano_1qhc3k9p1dxb45f9jrsz3afydqdxoo8y4deeu75q34pmskjgyafq67fd5k1r", accts[2].Address)
-	assert.Equal(t, "nano_3cmpq338qbq6hhhijia6ack71kas64snza6r89zhspffzaimxnokaofpa1wt", accts[3].Address)
-	assert.Equal(t, "nano_319uakdyoq48h3zswtwt8ei7fjdq4mue3dizzz3fbgnteqb5zqeycygteerd", accts[4].Address)
-	assert.Equal(t, "nano_1xew8dmxca5fbo16hgg88p9sgfpamig1kdos5te68hkstj3kf4bi1cyb3qdt", accts[5].Address)
-	assert.Equal(t, "nano_33iiz1hkggxirkspip8hef9uiiguhay5ykjdydnyuresxxt1mkkrfz9qeiak", accts[6].Address)
-	assert.Equal(t, "nano_3gxjsq4b55fd6hmzroa7wgtmw7wy7nwjofspewzhdwdo5dck9sa85rnfujrn", accts[7].Address)
-	assert.Equal(t, "nano_3xoyiewop6gk4g8jaynkf7bhn5baciwtdppkkoprsbafmimcmaiywz6pjqt5", accts[8].Address)
-	assert.Equal(t, "nano_1pigk4bbfhpdg3u5b8sdhij8c78n66eap9478p4dhgamyqt7herco57z6ib7", accts[9].Address)
+	assert.Equal(t, "xbrl_3hntkbk1q6pn1n8481shemojcmtpxxpjbojm7h5h5p6jz53bahjuif6d8j4f", accts[0].Address)
+	assert.Equal(t, "xbrl_1dh7j8bw1pi8xur1zste3c7oqc1ef3yttory4snhufb5haj1ctzxapgpqhzq", accts[1].Address)
+	assert.Equal(t, "xbrl_1qhc3k9p1dxb45f9jrsz3afydqdxoo8y4deeu75q34pmskjgyafq67fd5k1r", accts[2].Address)
+	assert.Equal(t, "xbrl_3cmpq338qbq6hhhijia6ack71kas64snza6r89zhspffzaimxnokaofpa1wt", accts[3].Address)
+	assert.Equal(t, "xbrl_319uakdyoq48h3zswtwt8ei7fjdq4mue3dizzz3fbgnteqb5zqeycygteerd", accts[4].Address)
+	assert.Equal(t, "xbrl_1xew8dmxca5fbo16hgg88p9sgfpamig1kdos5te68hkstj3kf4bi1cyb3qdt", accts[5].Address)
+	assert.Equal(t, "xbrl_33iiz1hkggxirkspip8hef9uiiguhay5ykjdydnyuresxxt1mkkrfz9qeiak", accts[6].Address)
+	assert.Equal(t, "xbrl_3gxjsq4b55fd6hmzroa7wgtmw7wy7nwjofspewzhdwdo5dck9sa85rnfujrn", accts[7].Address)
+	assert.Equal(t, "xbrl_3xoyiewop6gk4g8jaynkf7bhn5baciwtdppkkoprsbafmimcmaiywz6pjqt5", accts[8].Address)
+	assert.Equal(t, "xbrl_1pigk4bbfhpdg3u5b8sdhij8c78n66eap9478p4dhgamyqt7herco57z6ib7", accts[9].Address)
 
 	// Lets break the sequence
 	idx := 11
@@ -235,13 +235,13 @@ func TestAccountsList(t *testing.T) {
 	// So this isn't a mistake
 	assert.Len(t, accts, 7)
 
-	assert.Contains(t, accts, "nano_1g7kfyzdqggtmoop8kwiwu4kh7camtaukpc6gkt8mybm4ezx457wjoxyhiwb")
-	assert.Contains(t, accts, "nano_1ucbt3tm7y65tbz4pgxmnkce3ycgpiqcp8un7cybc3cxtapeangti3i9apbx")
-	assert.Contains(t, accts, "nano_3pws13shsun9b5o1febnzj8bb1nqa99no9fe9t3hm5r6ehi1mznzp31ri11s")
-	assert.Contains(t, accts, "nano_1og8yj39i88nc48qseiofnt3raxi7ttsomiz6n6nbo5qmfh954hynzzfhjk7")
-	assert.Contains(t, accts, "nano_1xbhmnrt6x1ji4pf6u1m3fckxifxusbmpsp6nuyhhpnfj719ja8z4aubfmud")
-	assert.Contains(t, accts, "nano_13687htr3rp5wxfyxpjjzctydd46rca6cpm377ce9eccctpy5ht3zb79b444")
-	assert.Contains(t, accts, "nano_1bzpyc67m6hzhm8egshbnyseowohs11d7hkcw4ksz8guetsyegkx3r1ns6s4")
+	assert.Contains(t, accts, "xbrl_1g7kfyzdqggtmoop8kwiwu4kh7camtaukpc6gkt8mybm4ezx457wjoxyhiwb")
+	assert.Contains(t, accts, "xbrl_1ucbt3tm7y65tbz4pgxmnkce3ycgpiqcp8un7cybc3cxtapeangti3i9apbx")
+	assert.Contains(t, accts, "xbrl_3pws13shsun9b5o1febnzj8bb1nqa99no9fe9t3hm5r6ehi1mznzp31ri11s")
+	assert.Contains(t, accts, "xbrl_1og8yj39i88nc48qseiofnt3raxi7ttsomiz6n6nbo5qmfh954hynzzfhjk7")
+	assert.Contains(t, accts, "xbrl_1xbhmnrt6x1ji4pf6u1m3fckxifxusbmpsp6nuyhhpnfj719ja8z4aubfmud")
+	assert.Contains(t, accts, "xbrl_13687htr3rp5wxfyxpjjzctydd46rca6cpm377ce9eccctpy5ht3zb79b444")
+	assert.Contains(t, accts, "xbrl_1bzpyc67m6hzhm8egshbnyseowohs11d7hkcw4ksz8guetsyegkx3r1ns6s4")
 
 	// 0 removes the limit clause
 	_, accts, err = MockWallet.AccountsList(wallet, 0)
@@ -250,13 +250,13 @@ func TestAccountsList(t *testing.T) {
 	// So this isn't a mistake
 	assert.Len(t, accts, 7)
 
-	assert.Contains(t, accts, "nano_1g7kfyzdqggtmoop8kwiwu4kh7camtaukpc6gkt8mybm4ezx457wjoxyhiwb")
-	assert.Contains(t, accts, "nano_1ucbt3tm7y65tbz4pgxmnkce3ycgpiqcp8un7cybc3cxtapeangti3i9apbx")
-	assert.Contains(t, accts, "nano_3pws13shsun9b5o1febnzj8bb1nqa99no9fe9t3hm5r6ehi1mznzp31ri11s")
-	assert.Contains(t, accts, "nano_1og8yj39i88nc48qseiofnt3raxi7ttsomiz6n6nbo5qmfh954hynzzfhjk7")
-	assert.Contains(t, accts, "nano_1xbhmnrt6x1ji4pf6u1m3fckxifxusbmpsp6nuyhhpnfj719ja8z4aubfmud")
-	assert.Contains(t, accts, "nano_13687htr3rp5wxfyxpjjzctydd46rca6cpm377ce9eccctpy5ht3zb79b444")
-	assert.Contains(t, accts, "nano_1bzpyc67m6hzhm8egshbnyseowohs11d7hkcw4ksz8guetsyegkx3r1ns6s4")
+	assert.Contains(t, accts, "xbrl_1g7kfyzdqggtmoop8kwiwu4kh7camtaukpc6gkt8mybm4ezx457wjoxyhiwb")
+	assert.Contains(t, accts, "xbrl_1ucbt3tm7y65tbz4pgxmnkce3ycgpiqcp8un7cybc3cxtapeangti3i9apbx")
+	assert.Contains(t, accts, "xbrl_3pws13shsun9b5o1febnzj8bb1nqa99no9fe9t3hm5r6ehi1mznzp31ri11s")
+	assert.Contains(t, accts, "xbrl_1og8yj39i88nc48qseiofnt3raxi7ttsomiz6n6nbo5qmfh954hynzzfhjk7")
+	assert.Contains(t, accts, "xbrl_1xbhmnrt6x1ji4pf6u1m3fckxifxusbmpsp6nuyhhpnfj719ja8z4aubfmud")
+	assert.Contains(t, accts, "xbrl_13687htr3rp5wxfyxpjjzctydd46rca6cpm377ce9eccctpy5ht3zb79b444")
+	assert.Contains(t, accts, "xbrl_1bzpyc67m6hzhm8egshbnyseowohs11d7hkcw4ksz8guetsyegkx3r1ns6s4")
 
 	// Check that it fails if wallet is locked
 	MockWallet.EncryptWallet(wallet, "password")
@@ -271,7 +271,7 @@ func TestAccountExists(t *testing.T) {
 	assert.Nil(t, err)
 
 	// Check that account exists if asle
-	exists, err := MockWallet.AccountExists(wallet, "nano_33mhuqjxr166czm4y37xk7emfnt4zogxmqrhbfxyngrkbdchmpsk6qehhm3n")
+	exists, err := MockWallet.AccountExists(wallet, "xbrl_33mhuqjxr166czm4y37xk7emfnt4zogxmqrhbfxyngrkbdchmpsk6qehhm3n")
 	assert.Nil(t, err)
 	assert.False(t, exists)
 
@@ -280,12 +280,12 @@ func TestAccountExists(t *testing.T) {
 	_, err = MockWallet.AdhocAccountCreate(wallet, priv)
 	assert.Nil(t, err)
 
-	exists, err = MockWallet.AccountExists(wallet, "nano_1hpq679fqnsahkjz4d66nantwsjbkd1erjbycinbrmhcfnuketzhfaeoptu6")
+	exists, err = MockWallet.AccountExists(wallet, "xbrl_1hpq679fqnsahkjz4d66nantwsjbkd1erjbycinbrmhcfnuketzhfaeoptu6")
 	assert.Nil(t, err)
 	assert.True(t, exists)
 
 	// Create some accounts
 	_, err = MockWallet.AccountCreate(wallet, nil)
-	exists, err = MockWallet.AccountExists(wallet, "nano_1pidkij46sqyf7gan8fugj693z5ornpf449tikop83dwsuosy1o5164p1jry")
+	exists, err = MockWallet.AccountExists(wallet, "xbrl_1pidkij46sqyf7gan8fugj693z5ornpf449tikop83dwsuosy1o5164p1jry")
 	assert.True(t, exists)
 }

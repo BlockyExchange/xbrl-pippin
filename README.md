@@ -173,7 +173,7 @@ Send HTTP POST requests to Pippin just like you would a normal node.
 
 ```
 % curl -g -d '{"action":"wallet_create"}' localhost:11338
-% curl -g -d '{"action":"account_balance", "account": "nano_3jb1fp4diu79wggp7e171jdpxp95auji4moste6gmc55pptwerfjqu48okse"}' localhost:11338
+% curl -g -d '{"action":"account_balance", "account": "xbrl_3jb1fp4diu79wggp7e171jdpxp95auji4moste6gmc55pptwerfjqu48okse"}' localhost:11338
 ```
 
 ## Feature requests

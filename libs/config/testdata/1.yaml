@@ -45,10 +45,7 @@ wallet:
   #  - ban_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj
 
   #preconfigured_representatives_nano:
-  #  - nano_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs
-  #  - nano_1thingspmippfngcrtk1ofd3uwftffnu4qu9xkauo9zkiuep6iknzci3jxa6
-  #  - nano_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd
-  #  - nano_3o7uzba8b9e1wqu5ziwpruteyrs3scyqr761x7ke6w1xctohxfh5du75qgaj
+  #  - xbrl_3b1ockyntd4ufjbu4mgxhauw1sszbnynpk4uezf8xsh5esiacqyffe8p94gp
 
   # Set work peer(s) to retrieve work from
   # DPoW/BPoW will be used automatically if environment is present, see README for details

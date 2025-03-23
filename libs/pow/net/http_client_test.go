@@ -32,7 +32,7 @@ func TestWorkGenerate(t *testing.T) {
 		},
 	)
 
-	resp, err := MakeWorkGenerateRequest(context.TODO(), "https://workurl.com", "nano_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", "ffffffffffff")
+	resp, err := MakeWorkGenerateRequest(context.TODO(), "https://workurl.com", "xbrl_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", "ffffffffffff")
 	assert.Nil(t, err)
 	assert.Equal(t, "abcd1234", resp.Work)
 
@@ -46,7 +46,7 @@ func TestWorkGenerate(t *testing.T) {
 		},
 	)
 
-	resp, err = MakeWorkGenerateRequest(context.TODO(), "https://workurl.com", "nano_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", "ffffffffffff")
+	resp, err = MakeWorkGenerateRequest(context.TODO(), "https://workurl.com", "xbrl_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", "ffffffffffff")
 	assert.NotNil(t, err)
 	assert.ErrorContains(t, err, "Unable to generate work")
 }
@@ -64,7 +64,7 @@ func TestWorkCancel(t *testing.T) {
 		},
 	)
 
-	err := MakeWorkCancelRequest(context.TODO(), "https://workurl.com", "nano_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3")
+	err := MakeWorkCancelRequest(context.TODO(), "https://workurl.com", "xbrl_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3")
 	assert.Nil(t, err)
 }
 

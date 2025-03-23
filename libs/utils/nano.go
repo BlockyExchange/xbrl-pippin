@@ -23,7 +23,7 @@ func AddressToPub(account string, banano bool) (public_key []byte, err error) {
 
 	if (!banano && address[:4] == "xrb_") || (banano && address[:4] == "ban_") {
 		address = address[4:]
-	} else if !banano && address[:5] == "nano_" {
+	} else if !banano && address[:5] == "xbrl_" {
 		address = address[5:]
 	} else {
 		return nil, errors.New("Invalid address format")
@@ -72,7 +72,7 @@ func PubKeyToAddress(pub ed25519.PublicKey, banano bool) string {
 	if banano {
 		prefix = "ban_"
 	} else {
-		prefix = "nano_"
+		prefix = "xbrl_"
 	}
 
 	return fmt.Sprintf("%s%s%s", prefix, address, checksum)

@@ -117,7 +117,7 @@ func TestWalletAdd(t *testing.T) {
 
 	// Make sure account is valid
 	assert.Contains(t, respJson, "account")
-	assert.Equal(t, "nano_1p95xji1g5gou8auj8h6qcuezpdpcyoqmawao6mpwj4p44939oouoturkggc", respJson["account"].(string))
+	assert.Equal(t, "xbrl_1p95xji1g5gou8auj8h6qcuezpdpcyoqmawao6mpwj4p44939oouoturkggc", respJson["account"].(string))
 
 	// Test same thing with an invalid key
 	// Request JSON
@@ -331,9 +331,9 @@ func TestWalletBalances(t *testing.T) {
 
 	balances := *respJson.Balances
 	assert.Len(t, balances, 1)
-	assert.Equal(t, "11999999999999999918751838129509869131", balances["nano_1gyeqc6u5j3oaxbe5qy1hyz3q745a318kh8h9ocnpan7fuxnq85cxqboapu5"].Balance)
-	assert.Equal(t, "0", balances["nano_1gyeqc6u5j3oaxbe5qy1hyz3q745a318kh8h9ocnpan7fuxnq85cxqboapu5"].Pending)
-	assert.Equal(t, "0", balances["nano_1gyeqc6u5j3oaxbe5qy1hyz3q745a318kh8h9ocnpan7fuxnq85cxqboapu5"].Receivable)
+	assert.Equal(t, "11999999999999999918751838129509869131", balances["xbrl_1gyeqc6u5j3oaxbe5qy1hyz3q745a318kh8h9ocnpan7fuxnq85cxqboapu5"].Balance)
+	assert.Equal(t, "0", balances["xbrl_1gyeqc6u5j3oaxbe5qy1hyz3q745a318kh8h9ocnpan7fuxnq85cxqboapu5"].Pending)
+	assert.Equal(t, "0", balances["xbrl_1gyeqc6u5j3oaxbe5qy1hyz3q745a318kh8h9ocnpan7fuxnq85cxqboapu5"].Receivable)
 }
 func TestWalletFrontiers(t *testing.T) {
 	httpmock.Activate()
@@ -370,8 +370,8 @@ func TestWalletFrontiers(t *testing.T) {
 
 	frontiers := *respJson.Frontiers
 	assert.Len(t, frontiers, 2)
-	assert.Equal(t, "791AF413173EEE674A6FCF633B5DFC0F3C33F397F0DA08E987D9E0741D40D81A", frontiers["nano_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"])
-	assert.Equal(t, "6A32397F4E95AF025DE29D9BF1ACE864D5404362258E06489FABDBA9DCCC046F", frontiers["nano_3i1aq1cchnmbn9x5rsbap8b15akfh7wj7pwskuzi7ahz8oq6cobd99d4r3b7"])
+	assert.Equal(t, "791AF413173EEE674A6FCF633B5DFC0F3C33F397F0DA08E987D9E0741D40D81A", frontiers["xbrl_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"])
+	assert.Equal(t, "6A32397F4E95AF025DE29D9BF1ACE864D5404362258E06489FABDBA9DCCC046F", frontiers["xbrl_3i1aq1cchnmbn9x5rsbap8b15akfh7wj7pwskuzi7ahz8oq6cobd99d4r3b7"])
 }
 
 func TestWalletPending(t *testing.T) {
@@ -409,8 +409,8 @@ func TestWalletPending(t *testing.T) {
 
 	blocks := *respJson.Blocks
 	assert.Len(t, blocks, 2)
-	assert.Equal(t, "4C1FEEF0BEA7F50BE35489A1233FE002B212DEA554B55B1B470D78BD8F210C74", blocks["nano_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"][0])
-	assert.Equal(t, "142A538F36833D1CC78B94E11C766F75818F8B940771335C6C1B8AB880C5BB1D", blocks["nano_1111111111111111111111111111111111111111111111111117353trpda"][0])
+	assert.Equal(t, "4C1FEEF0BEA7F50BE35489A1233FE002B212DEA554B55B1B470D78BD8F210C74", blocks["xbrl_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"][0])
+	assert.Equal(t, "142A538F36833D1CC78B94E11C766F75818F8B940771335C6C1B8AB880C5BB1D", blocks["xbrl_1111111111111111111111111111111111111111111111111117353trpda"][0])
 }
 
 func TestWalletInfo(t *testing.T) {
@@ -510,7 +510,7 @@ func TestWalletContains(t *testing.T) {
 	reqBody = map[string]interface{}{
 		"action":  "wallet_contains",
 		"wallet":  wallet.ID.String(),
-		"account": "nano_1jtx5p8141zjtukz4msp1x93st7nh475f74odj8673qqm96xczmtcnanos1o",
+		"account": "xbrl_1jtx5p8141zjtukz4msp1x93st7nh475f74odj8673qqm96xczmtcnanos1o",
 	}
 	body, _ = json.Marshal(reqBody)
 	w = httptest.NewRecorder()
@@ -535,7 +535,7 @@ func TestWalletRepresentativeSet(t *testing.T) {
 	reqBody := map[string]interface{}{
 		"action":         "wallet_representative_set",
 		"wallet":         wallet.ID.String(),
-		"representative": "nano_1jtx5p8141zjtukz4msp1x93st7nh475f74odj8673qqm96xczmtcnanos1o",
+		"representative": "xbrl_1jtx5p8141zjtukz4msp1x93st7nh475f74odj8673qqm96xczmtcnanos1o",
 	}
 	body, _ := json.Marshal(reqBody)
 	w := httptest.NewRecorder()
@@ -651,7 +651,7 @@ func TestWalletChangeSeed(t *testing.T) {
 	_, err := utils.AddressToPub(respJson.LastRestoredAccount, MockController.Wallet.Banano)
 	assert.Nil(t, err)
 	assert.Equal(t, "", respJson.Success)
-	assert.Equal(t, "nano_3w7gw4dhgbnjjxphdezseufjihxfwgm8pyuouuxb4zkfrnfmgnjdfp7ujt75", respJson.LastRestoredAccount)
+	assert.Equal(t, "xbrl_3w7gw4dhgbnjjxphdezseufjihxfwgm8pyuouuxb4zkfrnfmgnjdfp7ujt75", respJson.LastRestoredAccount)
 	assert.Equal(t, 1, respJson.RestoredCount)
 
 	// Bad request

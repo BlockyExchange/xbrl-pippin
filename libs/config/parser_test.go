@@ -37,10 +37,7 @@ func TestParser(t *testing.T) {
 		"ban_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj",
 	}, config.Wallet.PreconfiguredRepresentativesBanano)
 	assert.Equal(t, []string{
-		"nano_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs",
-		"nano_1thingspmippfngcrtk1ofd3uwftffnu4qu9xkauo9zkiuep6iknzci3jxa6",
-		"nano_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd",
-		"nano_3o7uzba8b9e1wqu5ziwpruteyrs3scyqr761x7ke6w1xctohxfh5du75qgaj",
+		"xbrl_3b1ockyntd4ufjbu4mgxhauw1sszbnynpk4uezf8xsh5esiacqyffe8p94gp",
 	}, config.Wallet.PreconfiguredRepresentativesNano)
 	assert.Equal(t, []string{}, config.Wallet.WorkPeers)
 	assert.Equal(t, "1000000000000000000000000", config.Wallet.ReceiveMinimum)
@@ -69,10 +66,10 @@ func TestParser(t *testing.T) {
 		"ban_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj",
 	}, config.Wallet.PreconfiguredRepresentativesBanano)
 	assert.Equal(t, []string{
-		"nano_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs",
-		"nano_1thingspmippfngcrtk1ofd3uwftffnu4qu9xkauo9zkiuep6iknzci3jxa6",
-		"nano_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd",
-		"nano_3o7uzba8b9e1wqu5ziwpruteyrs3scyqr761x7ke6w1xctohxfh5du75qgaj",
+		"xbrl_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs",
+		"xbrl_1thingspmippfngcrtk1ofd3uwftffnu4qu9xkauo9zkiuep6iknzci3jxa6",
+		"xbrl_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd",
+		"xbrl_3o7uzba8b9e1wqu5ziwpruteyrs3scyqr761x7ke6w1xctohxfh5du75qgaj",
 	}, config.Wallet.PreconfiguredRepresentativesNano)
 	assert.Empty(t, config.Wallet.WorkPeers)
 	assert.Equal(t, "1000000000000000000000000", config.Wallet.ReceiveMinimum)
@@ -101,10 +98,7 @@ func TestParser(t *testing.T) {
 		"ban_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj",
 	}, config.Wallet.PreconfiguredRepresentativesBanano)
 	assert.Equal(t, []string{
-		"nano_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs",
-		"nano_1thingspmippfngcrtk1ofd3uwftffnu4qu9xkauo9zkiuep6iknzci3jxa6",
-		"nano_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd",
-		"nano_3o7uzba8b9e1wqu5ziwpruteyrs3scyqr761x7ke6w1xctohxfh5du75qgaj",
+		"xbrl_3b1ockyxxqnxqw11gh9bu5g6u3m1cik3qfg84jn9pz4o19x94mj7a87fpej6",
 	}, config.Wallet.PreconfiguredRepresentativesNano)
 	assert.Empty(t, config.Wallet.WorkPeers)
 	assert.Equal(t, "1000000000000000000000000000", config.Wallet.ReceiveMinimum)
@@ -131,7 +125,7 @@ func TestParser(t *testing.T) {
 		"ban_3tta9pdxr4djdcm6r3c7969syoirj3dunrtynmmi8n1qtxzk9iksoz1gxdrh",
 	}, config.Wallet.PreconfiguredRepresentativesBanano)
 	assert.Equal(t, []string{
-		"nano_3tta9pdxr4djdcm6r3c7969syoirj3dunrtynmmi8n1qtxzk9iksoz1gxdrh",
+		"xbrl_3b1ockyxxqnxqw11gh9bu5g6u3m1cik3qfg84jn9pz4o19x94mj7a87fpej6",
 	}, config.Wallet.PreconfiguredRepresentativesNano)
 	assert.Equal(t, []string{
 		"http://localhost:5555",
@@ -201,7 +195,7 @@ func TestConfigValidation(t *testing.T) {
 
 	// Check representatives
 	config.Wallet.PreconfiguredRepresentativesBanano = []string{"ban_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj"}
-	config.Wallet.PreconfiguredRepresentativesNano = []string{"nano_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj"}
+	config.Wallet.PreconfiguredRepresentativesNano = []string{"xbrl_3b1ockyxxqnxqw11gh9bu5g6u3m1cik3qfg84jn9pz4o19x94mj7a87fpej6"}
 	config.Wallet.Banano = false
 	assert.Nil(t, config.Validate())
 	config.Wallet.Banano = true
@@ -212,5 +206,5 @@ func TestConfigValidation(t *testing.T) {
 	config.Wallet.Banano = false
 	config.Wallet.PreconfiguredRepresentativesBanano = []string{}
 	assert.Nil(t, config.Validate())
-	config.Wallet.PreconfiguredRepresentativesNano = []string{"nano_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjk"}
+	config.Wallet.PreconfiguredRepresentativesNano = []string{"xbrl_3b1ockyxxqnxqw11gh9bu5g6u3m1cik3qfg84jn9pz4o19x94mj7a87fpej6"}
 }
